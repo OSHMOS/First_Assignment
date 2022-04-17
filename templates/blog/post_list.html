@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in posts %}
+        <div>
+            <h3><a href="{% url 'detail' post.id %}" id="title">{{ post.title }}</a></h3>
+        </div>
+            <a href="{% url 'update' post.id %}">수정</a>
+            <a href="{% url 'delete' post.id %}">삭제</a>
+{% endfor %}
+{% endblock %}
