@@ -1,38 +1,25 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-        * {
-            margin: 0;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            width: 100%;
-            height: 50px;
-            background: royalblue;
-        }
-        a {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% block css %}
+    <link rel="stylesheet" href="{% static 'blog/css/base_style.css' %}" />
     {% endblock %}
     <title>dev'Rent Blog</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
+      <a href="{% url 'index' %}">
         <div class="header_logo">dev'Rent Blog</div>
-        <div><a href="{% url 'create' %}">포스팅하기</a></div>
+      </a>
+      <div><a href="{% url 'create' %}">포스팅하기</a></div>
     </header>
-    {% block content %}
-    {% endblock %}
-</body>
+    {% block content %} {% endblock %}
+  </body>
 </html>

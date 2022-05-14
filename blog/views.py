@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
@@ -28,17 +28,17 @@ def create(request):
     return render(request, 'blog/post_create.html', ctx)
 
 def update(request, post_id):
-    post = Post.objects.get(id=post_id)
-    form = PostForm()
+    update_content = get_object_or_404(Post, id=post_id)
+
     if request.method == 'POST':
-        post.title = request.POST['title']
-        post.content = request.POST['content']
-        post.create_date = timezone.now()
-        post.save()
+      form = PostForm(request.POST, instance=update_content)
+      if form.is_valid():
+        form.save()
         return redirect('index')
     else:
-        ctx = {'form': form}
-        return render(request, 'blog/post_update.html', ctx)
+        form =PostForm(instance=update_content)
+    ctx = {'form': form}
+    return render(request, 'blog/post_update.html', ctx)
 
 def delete(request, post_id):
     post = Post.objects.get(id=post_id)
